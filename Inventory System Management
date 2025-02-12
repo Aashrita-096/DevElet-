@@ -1,0 +1,67 @@
+class Inventory:
+    def __init__(self):
+        self.products = {}
+
+    def add_product(self):
+        name = input("Enter product name: ")
+        if name in self.products:
+            print("Product already exists. Use update option instead.")
+            return
+        quantity = int(input("Enter quantity: "))
+        price = float(input("Enter price per unit: "))
+        self.products[name] = {'quantity': quantity, 'price': price}
+        print(f"{name} added successfully!")
+
+    def view_stock(self):
+        if not self.products:
+            print("No products in inventory.")
+            return
+        print("\nCurrent Inventory:")
+        for name, details in self.products.items():
+            print(f"Product: {name}, Quantity: {details['quantity']}, Price: ${details['price']:.2f}")
+
+    def remove_product(self):
+        name = input("Enter product name to remove: ")
+        if name in self.products:
+            del self.products[name]
+            print(f"{name} removed successfully!")
+        else:
+            print("Product not found.")
+
+    def update_product(self):
+        name = input("Enter product name to update: ")
+        if name in self.products:
+            quantity = int(input("Enter new quantity: "))
+            price = float(input("Enter new price per unit: "))
+            self.products[name] = {'quantity': quantity, 'price': price}
+            print(f"{name} updated successfully!")
+        else:
+            print("Product not found.")
+
+    def run(self):
+        while True:
+            print("\nInventory Management System")
+            print("1. Add Product")
+            print("2. View Stock")
+            print("3. Remove Product")
+            print("4. Update Product")
+            print("5. Exit")
+            choice = input("Enter your choice: ")
+            
+            if choice == "1":
+                self.add_product()
+            elif choice == "2":
+                self.view_stock()
+            elif choice == "3":
+                self.remove_product()
+            elif choice == "4":
+                self.update_product()
+            elif choice == "5":
+                print("Exiting Inventory System. Goodbye!")
+                break
+            else:
+                print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    inventory = Inventory()
+    inventory.run()
